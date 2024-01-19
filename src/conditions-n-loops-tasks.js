@@ -128,24 +128,26 @@ function isIsoscelesTriangle(a, b, c) {
  *  26  => XXVI
  */
 function convertToRomanNumerals(num) {
+  let result = '';
   if (num < 1) {
-    return '';
-  }
-  if (num >= 10) {
-    return `X${convertToRomanNumerals(num - 10)}`;
-  }
-  if (num >= 9) {
-    return `IX${convertToRomanNumerals(num - 9)}`;
-  }
-  if (num >= 5) {
-    return `V${convertToRomanNumerals(num - 5)}`;
-  }
-  if (num >= 4) {
-    return `IV${convertToRomanNumerals(num - 4)}`;
+    result = '';
   }
   if (num >= 1) {
-    return `I${convertToRomanNumerals(num - 1)}`;
+    result = `I${convertToRomanNumerals(num - 1)}`;
   }
+  if (num >= 4) {
+    result = `IV${convertToRomanNumerals(num - 4)}`;
+  }
+  if (num >= 5) {
+    result = `V${convertToRomanNumerals(num - 5)}`;
+  }
+  if (num >= 9) {
+    result = `IX${convertToRomanNumerals(num - 9)}`;
+  }
+  if (num >= 10) {
+    result = `X${convertToRomanNumerals(num - 10)}`;
+  }
+  return result;
 }
 
 /**
@@ -341,7 +343,6 @@ function getSpiralMatrix(size) {
         iBegin += 1;
         iEnd = jEnd;
         jBegin = jEnd;
-        jEnd = jEnd;
         break;
       case 'down':
         for (let i = iBegin; i <= iEnd; i += 1) {
@@ -354,7 +355,6 @@ function getSpiralMatrix(size) {
         jBegin = iEnd - 1;
         jEnd = iBegin - 1;
         iBegin = iEnd;
-        iEnd = iEnd;
         break;
       case 'left':
         for (let i = iBegin; i <= iEnd; i += 1) {
@@ -367,7 +367,6 @@ function getSpiralMatrix(size) {
         iBegin = jBegin;
         iEnd = jEnd + 1;
         jBegin = jEnd;
-        jEnd = jEnd;
         break;
       case 'up':
         for (let i = iBegin; i >= iEnd; i -= 1) {
@@ -423,7 +422,7 @@ function rotateMatrix(/* matrix */) {
  *  [2, 9, 5, 9]    => [2, 5, 9, 9]
  *  [-2, 9, 5, -3]  => [-3, -2, 5, 9]
  */
-function sortByAsc(arr) {
+function sortByAsc(/* arr */) {
   throw new Error('Not implemented');
 }
 
