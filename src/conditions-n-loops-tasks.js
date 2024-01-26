@@ -166,32 +166,40 @@ function convertToRomanNumerals(num) {
  *  '1950.2'  => 'one nine five zero point two'
  */
 function convertNumberToString(numberStr) {
-  let resultStr = '';
-  const digitsMap = new Map([
-    ['1', 'one'],
-    ['2', 'two'],
-    ['3', 'three'],
-    ['4', 'four'],
-    ['5', 'five'],
-    ['6', 'six'],
-    ['7', 'seven'],
-    ['8', 'eight'],
-    ['9', 'nine'],
-    ['0', 'zero'],
-    ['.', 'point'],
-    [',', 'point'],
-    ['-', 'minus'],
-  ]);
-  for (let i = 0; i < numberStr.length; i += 1) {
-    for (const [key, value] of digitsMap) {
-      if (numberStr[i] === key) {
-        if (resultStr === '') {
-          resultStr = `${value}`;
-        } else {
-          resultStr = `${resultStr} ${value}`;
-        }
-      }
+  function getSymbolValue(char) {
+    switch (char) {
+      case '0':
+        return 'zero';
+      case '1':
+        return 'one';
+      case '2':
+        return 'two';
+      case '3':
+        return 'three';
+      case '4':
+        return 'four';
+      case '5':
+        return 'five';
+      case '6':
+        return 'six';
+      case '7':
+        return 'seven';
+      case '8':
+        return 'eight';
+      case '9':
+        return 'nine';
+      case ',':
+      case '.':
+        return 'point';
+      case '-':
+        return 'minus';
+      default:
+        return '';
     }
+  }
+  let resultStr = getSymbolValue(numberStr[numberStr.length - 1]);
+  for (let i = numberStr.length - 2; i >= 0; i -= 1) {
+    resultStr = `${getSymbolValue(numberStr[i])} ${resultStr}`;
   }
   return resultStr;
 }
@@ -422,8 +430,18 @@ function rotateMatrix(/* matrix */) {
  *  [2, 9, 5, 9]    => [2, 5, 9, 9]
  *  [-2, 9, 5, -3]  => [-3, -2, 5, 9]
  */
-function sortByAsc(/* arr */) {
-  throw new Error('Not implemented');
+function sortByAsc(arr) {
+  const sorted = arr;
+  for (let j = sorted.length - 1; j > 0; j -= 1) {
+    for (let i = 0; i < j; i += 1) {
+      if (sorted[i] > sorted[i + 1]) {
+        const temp = sorted[i];
+        sorted[i] = sorted[i + 1];
+        sorted[i + 1] = temp;
+      }
+    }
+  }
+  return sorted;
 }
 
 /**
