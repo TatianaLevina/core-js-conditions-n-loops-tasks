@@ -426,7 +426,7 @@ function rotateMatrix(/* matrix */) {
  * Take into account that the array can be very large. Consider how you can optimize your solution.
  * In this task, the use of methods of the Array and String classes is not allowed.
  *
- * @param {number[]} arr - The array to sort.
+ * @param {number[]} array - The array to sort.
  * @return {number[]} The sorted array.
  *
  * @example:
@@ -434,18 +434,37 @@ function rotateMatrix(/* matrix */) {
  *  [2, 9, 5, 9]    => [2, 5, 9, 9]
  *  [-2, 9, 5, -3]  => [-3, -2, 5, 9]
  */
-function sortByAsc(arr) {
-  const sorted = arr;
-  for (let j = sorted.length - 1; j > 0; j -= 1) {
-    for (let i = 0; i < j; i += 1) {
-      if (sorted[i] > sorted[i + 1]) {
-        const temp = sorted[i];
-        sorted[i] = sorted[i + 1];
-        sorted[i + 1] = temp;
+function sortByAsc(array) {
+  const arr = array;
+
+  function partition(l, h) {
+    let low = l;
+    let high = h;
+    const pivotEl = arr[low];
+    while (low < high) {
+      while (low < high && arr[high] > pivotEl) {
+        high -= 1;
       }
+      arr[low] = arr[high];
+      while (low < high && arr[low] <= pivotEl) {
+        low += 1;
+      }
+      arr[high] = arr[low];
     }
+    arr[low] = pivotEl;
+    return low;
   }
-  return sorted;
+
+  function sort(low, high) {
+    if (low >= high) {
+      return;
+    }
+    const pivot = partition(low, high);
+    sort(low, pivot - 1);
+    sort(pivot + 1, high);
+  }
+  sort(0, arr.length - 1);
+  return arr;
 }
 
 /**
