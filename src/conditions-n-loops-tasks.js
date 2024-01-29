@@ -492,8 +492,7 @@ function sortByAsc(/* array */) {
  */
 function shuffleChar(str, iterations) {
   let arrResult = str.split('');
-
-  for (let i = 0; i < iterations; i += 1) {
+  for (let i = 0; i < Math.min(iterations, str.length); i += 1) {
     const arrTemp = new Array(arrResult.length);
     let insertIdx = 0;
     for (let j = 0; j < arrResult.length; j += 1) {
